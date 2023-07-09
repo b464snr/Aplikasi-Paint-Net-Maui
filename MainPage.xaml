@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:kanvas="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:FenDraw"
+             xmlns:viewmodel="clr-namespace:FenDraw.ViewModel"
+             x:DataType="viewmodel:MainViewModel"
+             x:Class="FenDraw.MainPage"
+             Shell.NavBarIsVisible="false">
+    <ContentPage.Resources>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <viewmodel:MainViewModel Color="DarkRed" />
+    </ContentPage.BindingContext>
+    <StackLayout
+            BackgroundColor="black"
+            VerticalOptions="Fill">
+        <!--Navigator ( sementara )-->
+        <HorizontalStackLayout
+            BackgroundColor="Gray"
+            HeightRequest="25"
+            VerticalOptions="StartAndExpand"
+            >
+        </HorizontalStackLayout>
+        <!--for test purpuse only!!! -->
+        <Image
+            IsVisible="false"
+            x:Name="ImageView"
+            BackgroundColor="White"
+            WidthRequest="50"
+            HeightRequest="60"/>
+        <!--Main Kanvas-->
+        <Grid
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand">
+
+            <kanvas:DrawingView 
+                    x:Name="Kertas"
+                    BackgroundColor="White"                       
+                    WidthRequest="250"
+                    HeightRequest="300"
+                    LineColor="{Binding Color}"
+                    LineWidth="{Binding Size}"
+                    IsMultiLineModeEnabled="True"
+                    />
+            <!-- DrawingLineCompleted="SaveCommand"-->
+            <Image  x:Name="Pann"
+                        IsVisible="false"
+                        Scale="1"
+                        BackgroundColor="Transparent"
+                        WidthRequest="250"
+                        HeightRequest="300"
+                                    >
+                <Image.GestureRecognizers>
+                    <PinchGestureRecognizer PinchUpdated="OnPinchUpdated"/>
+                    <PanGestureRecognizer PanUpdated="OnPanUpdated" />
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+        <!--Tools-->
+        <VerticalStackLayout
+            VerticalOptions="EndAndExpand"
+            HorizontalOptions="FillAndExpand">
+            <VerticalStackLayout
+                x:Name="LineCommand"
+                IsVisible="false"
+                VerticalOptions="StartAndExpand"
+                HorizontalOptions="FillAndExpand">
+            <!-- Pengubah Warna -->
+            <VerticalStackLayout
+                x:Name="ColorChanger"
+                IsVisible="false"
+                VerticalOptions="StartAndExpand"
+                BackgroundColor="Gray">
+                <BoxView Color="{Binding Color}"
+                         HeightRequest="20"
+                         WidthRequest="100"
+                         HorizontalOptions="Center"/>
+                <Label Text="{Binding Hue, StringFormat='Hue = {0:F2}'}"
+               HorizontalOptions="Center" />
+                <Slider Value="{Binding Hue}"
+                Margin="5,0,5,0" />
+                <Label Text="{Binding Saturation, StringFormat='Saturation = {0:F2}'}"
+               HorizontalOptions="Center" />
+                <Slider Value="{Binding Saturation}"
+                Margin="5,0,5,0" />
+                <Label Text="{Binding Luminosity, StringFormat='Luminosity = {0:F2}'}"
+               HorizontalOptions="Center" />
+                <Slider Value="{Binding Luminosity}"
+                Margin="5,0,5,0" />
+                </VerticalStackLayout>
+                <!--Pengatur Besar Garis-->
+                <Grid
+                    x:Name="SizeCommand"
+                    IsVisible="false"
+                    BackgroundColor="DimGrey">
+                    <Label Text="{Binding Size, StringFormat='Size = {0:F2}'}"
+                           Margin="0,20"
+               HorizontalOptions="Center" />
+                    <Slider Value="{Binding Size}"
+                        Maximum="25"
+                        Minimum="1"
+                Margin="5,0,5,0" />
+                </Grid>
+                <!--LineMainCommand-->
+                <ScrollView
+                Orientation="Horizontal">
+                    <HorizontalStackLayout
+                x:Name="linebox"
+                BackgroundColor="DimGrey"
+                VerticalOptions="EndAndExpand"
+                Padding="10"
+                HorizontalOptions="CenterAndExpand">
+                        <Button x:Name="LineSize"
+                        BackgroundColor="White"
+                        Pressed="LineSubCommand"
+                        TextColor="Black"
+                        Text="LineSize"
+                        WidthRequest="125"/>
+                        <Button x:Name="LineColor"
+                        BackgroundColor="White"
+                        TextColor="Black"
+                        Pressed="LineSubCommand"
+                        Text="LineColor"
+                        WidthRequest="125"/>
+                    </HorizontalStackLayout>
+                </ScrollView>
+            </VerticalStackLayout>
+            <!--View Control-->
+            <HorizontalStackLayout
+            x:Name="ViewControl"
+            IsVisible="false"
+            BackgroundColor="DimGrey"
+            Padding="10"
+            HorizontalOptions="CenterAndExpand">
+                <Button x:Name="RotateRight"
+                BackgroundColor="White"
+                Pressed="ViewCommand"
+                TextColor="Black"
+                Text="RotateRight"
+                WidthRequest="125"/>
+                <Button x:Name="RotateLeft"
+                BackgroundColor="White"
+                TextColor="Black"
+                Pressed="ViewCommand"
+                Text="RotateLeft"
+ 
+                WidthRequest="125"/>
+            </HorizontalStackLayout>
+            <!-- Fungsi Utama -->
+            <ScrollView
+                Orientation="Horizontal"
+                Margin="0,0,0,30">
+                <HorizontalStackLayout
+                BackgroundColor="Gray"
+                VerticalOptions="EndAndExpand">
+                    <Button x:Name="lining"
+                    BackgroundColor="white"
+                    Text="Line"
+                    TextColor="Black"
+                    WidthRequest="125"
+                    Clicked="Tools"/>
+                    <Button x:Name="viewing"
+                    BackgroundColor="white"
+                    Text="View"
+                    TextColor="Black"
+                    WidthRequest="125"
+                    Clicked="Tools"/>
+                </HorizontalStackLayout>
+            </ScrollView>
+            
+        </VerticalStackLayout>
+    </StackLayout>
+</ContentPage>
