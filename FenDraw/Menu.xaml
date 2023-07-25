@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FenDraw.Menu"
+             Title="Menu"
+             NavigationPage.HasNavigationBar="False" >
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Button x:Name="NewP"
+                Text="Project Baru"
+                BackgroundColor="LightBlue"
+                TextColor="White"
+                WidthRequest="500"
+                HeightRequest="250"
+                Clicked="NProject"/>
+        <Button x:Name="CurP"
+                Text="Pilih Gambar/Project"
+                BackgroundColor="LightBlue"
+                TextColor="White"
+                WidthRequest="500"
+                HeightRequest="250"
+                Clicked="CProject"/>
+        <Button x:Name="Exit"
+                Text="Keluar"
+                BackgroundColor="LightBlue"
+                TextColor="White"
+                WidthRequest="500"
+                HeightRequest="250"/>
+    </VerticalStackLayout>
+</ContentPage>
